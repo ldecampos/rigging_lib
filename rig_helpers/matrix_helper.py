@@ -8,7 +8,7 @@ IDENTITY_MATRIX = [1.0, 0.0, 0.0, 0.0,
                    0.0, 0.0, 0.0, 1.0]
 
 
-def check_node_exists(node):
+def node_exists(node):
     """
 
     Check if the node exists inside the current scene
@@ -40,7 +40,7 @@ def get_position(node, **kwargs):
     """
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     position = cmds.xform(node, query=True, translation=True, worldSpace=True, **kwargs)
 
@@ -62,7 +62,7 @@ def get_rotation(node, **kwargs):
     """
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     rotation = cmds.xform(node, query=True, rotation=True, worldSpace=True, **kwargs)
 
@@ -84,7 +84,7 @@ def get_scale(node, **kwargs):
     """
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     scale = cmds.xform(node, query=True, scale=True, worldSpace=True, **kwargs)
 
@@ -111,7 +111,7 @@ def get_matrix(node, **kwargs):
     """
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     matrix = cmds.xform(node, query=True, matrix=True, worldSpace=True, **kwargs)
 
@@ -131,7 +131,7 @@ def set_position(node, position, **kwargs):
     """
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     cmds.xform(node, translation=position, absolute=True, worldSpace=True, **kwargs)
 
@@ -149,7 +149,7 @@ def set_rotation(node, rotation, **kwargs):
     """
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     cmds.xform(node, rotation=rotation, absolute=True, worldSpace=True, **kwargs)
 
@@ -167,7 +167,7 @@ def set_scale(node, scale, **kwargs):
     """
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     cmds.xform(node, scale=scale, absolute=True, worldSpace=True, **kwargs)
 
@@ -185,7 +185,7 @@ def set_matrix(node, matrix, **kwargs):
     """
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     cmds.xform(node, matrix=matrix, absolute=True, worldSpace=True, **kwargs)
 
@@ -205,8 +205,8 @@ def put_in_place(source, target, pos=True, rot=True, scl=False):
     """
 
     # Checks
-    check_node_exists(source)
-    check_node_exists(target)
+    node_exists(source)
+    node_exists(target)
 
     if pos:
         target_pos = get_position(node=source)
@@ -235,7 +235,7 @@ def bake_transform_to_offset_parent_matrix(node):
         raise Exception('You need a version of maya 2020 or higher')
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     # openMAya is used because matrix multiplication is easier and faster
     local_matrix = OpenMaya.MMatrix(cmds.xform(node, query=True, matrix=True, worldSpace=False))
