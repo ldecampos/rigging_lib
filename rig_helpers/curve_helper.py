@@ -1,7 +1,7 @@
 from maya import cmds
 
 
-def check_node_exists(node):
+def node_exists(node):
     """
 
     Check if the node exists inside the current scene
@@ -30,7 +30,7 @@ def is_nurbs_curve(crv):
     """
 
     # Checks
-    check_node_exists(crv)
+    node_exists(crv)
 
     # Check object type
     if cmds.objectType(crv) != 'nurbsCurve':
@@ -56,7 +56,7 @@ def get_cvs_number(node):
     """
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     # Get the nurbs curve
     crv = node
@@ -85,7 +85,7 @@ def get_curve_length(node):
     """
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     # Get the nurbs curve
     crv = node
@@ -141,7 +141,7 @@ def convert_to_bezier(node):
     """
 
     # Checks
-    check_node_exists(node)
+    node_exists(node)
 
     # Get shape
     shape = cmds.listRelatives(node, shapes=True)[0]
@@ -174,8 +174,8 @@ def get_nearest_point_on_curve(node, source, world_space=True):
     """
 
     # Checks
-    check_node_exists(node)
-    check_node_exists(source)
+    node_exists(node)
+    node_exists(source)
 
     # Get the nurbs curve
     crv = node
