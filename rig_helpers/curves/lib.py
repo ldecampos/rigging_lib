@@ -1,21 +1,29 @@
 from maya import cmds
 
 
-def node_exists(node):
-    """
+class CurveHelper(object):
 
-    Check if the node exists inside the current scene
+    def __init__(self, obj):
+        """
+        Args:
+            obj: (str): Maya object name
+        """
 
-    Args:
-        node (str) : Name of the node to check
+        self.obj = obj
 
-    Raises:
-        ValueError: when the node does not exit
+    def node_exists(self):
+        """
+        Check if the obj exists in the scene
 
-    """
+        Returns:
+            bool
+        """
 
-    if not cmds.objExists(node):
-        raise ValueError('node "{}" does not exist in the scene'.format(node))
+        if cmds.objExists(self.obj, exists=True):
+            return True
+
+        return False
+
 
 
 def is_nurbs_curve(crv):
